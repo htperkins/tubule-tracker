@@ -5,7 +5,7 @@
 close all; clear;
 profile = [];
 filename = 'ExampleTubuleMSD';
-framerate = 1/(20*10^(-3));    %Number of frames per second, or 1/exposure time
+framerate = 1/(30*10^(-3));    %Number of frames per second, or 1/exposure time
 pixelscale = 0.104;        %Size of one pixel in microns
 coordDef = 'click';      %'type' if re-analysing from previous MSD or 'click' to use mouse
 datanum = 57;       %Use for 'type' only - this is the row of the struct to re-analyse
