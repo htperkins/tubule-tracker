@@ -5,7 +5,7 @@
 close all; clear;
 profile = [];
 filename = 'ExampleTubuleMSD';
-framerate = 1/(30*10^(-3));    %Number of frames per second, or 1/exposure time
+framerate = 1/(20*10^(-3));    %Number of frames per second, or 1/exposure time
 pixelscale = 0.104;        %Size of one pixel in microns
 coordDef = 'click';      %'type' if re-analysing from previous MSD or 'click' to use mouse
 datanum = 57;       %Use for 'type' only - this is the row of the struct to re-analyse
@@ -29,8 +29,10 @@ if strcmp(coordDef,'type')
     load(saveMSDpath);
     xline = [MSDData(datanum).xLimits];
     yline = [MSDData(datanum).yLimits];
-%     xline = [2.0102;9.6429];
-%     yline = [8.6837;8.0714];
+    %To define the example tubule manually, the following two lines can be
+    %uncommented. The 3 lines above must then be commented out
+%      xline = [5.448979591836735;13.489795918367346];
+%      yline = [12.724489795918366;4.520408163265305];
     hold on;
     plot(xline,yline);
     close all; clear I;
@@ -187,7 +189,7 @@ for ii = 1:2000
 
 end
 
-%Plot the midpoint over time to see if any frames are outliers
+%Plot the midpoint over time
 figure;plot(midpoint);
 xlabel('Frame');ylabel('Tubule Centre (pix)');
 %To check the tracking, can produce a video with the overlaid tracked
@@ -209,8 +211,6 @@ if exist(saveMSDpath,'file') == 0
     MSDData.Track = midpoint;
     MSDData.File = filename;
     MSDData.Framerate = framerate;
-    MSDData.BranchAtBothEnds = branchAtBothEnds;
-    MSDData.PercentageDistanceFromNE = percDistFromNE;
     MSDData.OriginalMSD = MSD;
     MSDData.MSDIntercept = intercept;
     MSDData.Alpha = Alpha;
@@ -228,8 +228,6 @@ else
     MSDData(ii).xLimits = xline;
     MSDData(ii).yLimits = yline;
     MSDData(ii).Track = midpoint;
-    MSDData(ii).BranchAtBothEnds = branchAtBothEnds;
-    MSDData(ii).PercentageDistanceFromNE = percDistFromNE;
     MSDData(ii).OriginalMSD = MSD;
     MSDData(ii).MSDIntercept = intercept;
     MSDData(ii).Alpha = Alpha;
